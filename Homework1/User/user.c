@@ -1,6 +1,3 @@
-/*
- * User management implementation
- */
 #include <stdio.h>
 #include <string.h>
 #include "user.h"
@@ -18,16 +15,17 @@ UserRetCode_t addUser(User_t users[], int *count)
 	}
 
 	printf("Enter user name: ");
-	// read line
+	/* Read user name from stdin with length of NAME_LENGTH */
 	if (fgets(users[*count].name, NAME_LENGTH, stdin) == NULL) {
-		return USER_ADD_FAILED_FULL; // treat as failure
+		return USER_ADD_FAILED_FULL; 
 	}
-	// Remove newline character from the end of the string
+	/* Remove newline character from the end of the string */
 	users[*count].name[strcspn(users[*count].name, "\n")] = '\0';
-
+	/* Assign user ID */
 	users[*count].id = *count + 1;
+	
 	users[*count].borrowedBooksCount = 0;
-	// initialize borrowed books list
+	// Initialize borrowed books list
 	for (int i = 0; i < MAX_BORROWED_BOOKS; i++) {
 		users[*count].borrowedBooks[i] = 0;
 	}
@@ -40,13 +38,17 @@ UserRetCode_t editUser(User_t users[], int *count)
 {
 	int id;
 	printf("Enter user ID to edit: ");
+
+	/* If id is not a number, eat chars to make fresh */
 	if (scanf("%d", &id) != 1) {
-		// consume rest of line
-		int c; while ((c = getchar()) != '\n' && c != EOF);
+		int c; 
+		while ((c = getchar()) != '\n' && c != EOF);
 		return USER_EDIT_GAILED_NOT_FOUND;
 	}
-	// consume newline
-	int c; while ((c = getchar()) != '\n' && c != EOF);
+
+	/* Eat newline char */
+	int c; 
+	while ((c = getchar()) != '\n' && c != EOF);
 
 	for (int i = 0; i < *count; i++) {
 		if (users[i].id == id) {
@@ -54,9 +56,9 @@ UserRetCode_t editUser(User_t users[], int *count)
 			char buf[NAME_LENGTH];
 			if (fgets(buf, NAME_LENGTH, stdin) != NULL) {
 				if (buf[0] != '\n') {
-                    // Remove newline character from the end of the string
+                    /* Remove newline character from the end of the string */ 
 					buf[strcspn(buf, "\n")] = '\0';
-                    // Copy the string to the user struct
+                    /* Copy the string to the user struct */ 
 					strncpy(users[i].name, buf, NAME_LENGTH - 1);
 				}
 			}
@@ -71,11 +73,17 @@ UserRetCode_t deleteUser(User_t users[], int *count)
 {
 	int id;
 	printf("Enter user ID to delete: ");
+
 	if (scanf("%d", &id) != 1) {
-		int c; while ((c = getchar()) != '\n' && c != EOF);
+		int c; 
+		/* If it is not a number, eat chars to make fresh */
+		while ((c = getchar()) != '\n' && c != EOF);
 		return USER_DELETE_FAILED_NOT_FOUND;
 	}
-	int c; while ((c = getchar()) != '\n' && c != EOF);
+
+	/* Eat newline char */
+	int c; 
+	while ((c = getchar()) != '\n' && c != EOF);
 
 	for (int i = 0; i < *count; i++) {
 		if (users[i].id == id) {

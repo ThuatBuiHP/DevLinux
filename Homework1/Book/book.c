@@ -17,10 +17,10 @@ BookRetCode_t addBook(Book_t books[], int *count) {
 
     // Get book details from user
     printf("Enter book title: ");
-    scanf(" %[^\n]s", books[*count].title);
+    scanf(" %[^\n]", books[*count].title);
     
     printf("Enter author name: ");
-    scanf(" %[^\n]s", books[*count].author);
+    scanf(" %[^\n]", books[*count].author);
     
     // Set initial values
     books[*count].id = *count + 1;  // IDs start from 1

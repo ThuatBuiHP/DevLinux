@@ -42,7 +42,7 @@ UserRetCode_t addUser(User_t users[], int *count);
 /**
   * @brief   Edit the information of an existing user.
   * @param   users  Array of User_t structs representing the user database.
-  * @param   count  Pointer to the current number of users (incremented after successful addition).
+  * @param   count  Pointer to the current number of users.
   * @return  int    Error code defined in UserRetCode_t (e.g., USER_SUCCESS_EDIT).
   */
 UserRetCode_t editUser(User_t users[], int *count);

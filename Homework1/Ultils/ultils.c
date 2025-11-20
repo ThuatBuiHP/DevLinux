@@ -153,7 +153,7 @@ BookRetCode_t searchBook(Book_t books[], int count) {
     int found = 0;
     
     printf("Enter book title or author to search: ");
-    scanf(" %[^\n]s", searchTerm);
+    scanf(" %[^\n]", searchTerm);
     
     printf("\n%-5s %-30s %-30s %-15s\n", "ID", "Title", "Author", "Status");
     printf("------------------------------------------------------------\n");
@@ -182,7 +182,7 @@ UserRetCode_t searchUser(User_t users[], int count) {
     int found = 0;
     
     printf("Enter user name to search: ");
-    scanf(" %[^\n]s", searchTerm);
+    scanf(" %[^\n]", searchTerm);
     
     printf("\n%-5s %-30s %-20s\n", "ID", "Name", "Books Borrowed");
     printf("--------------------------------------------\n");
